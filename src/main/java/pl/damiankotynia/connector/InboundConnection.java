@@ -13,17 +13,17 @@ import java.util.List;
 
 import static pl.damiankotynia.service.Utils.CONNECTION_LOGGER;
 
-public class Connection implements Runnable {
+public class InboundConnection implements Runnable {
     private Socket socket;
     private int clientNumber;
     private ObjectInputStream inputStream = null;
     private ObjectOutputStream outputStream = null;
     private RequestExecutor requestExecutor;
-    private List<Connection> connectionList;
+    private List<InboundConnection> connectionList;
     private boolean running;
 
-    public Connection(Socket socket, int client, List<Connection> connectionList) {
-        System.out.println(CONNECTION_LOGGER + "New Connection");
+    public InboundConnection(Socket socket, int client, List<InboundConnection> connectionList) {
+        System.out.println(CONNECTION_LOGGER + "New InboundConnection");
         this.clientNumber = client;
         this.socket = socket;
         this.requestExecutor = new RequestExecutor();
@@ -101,7 +101,7 @@ public class Connection implements Runnable {
     }
     /*TODO wywalić jak będzie zbędna
     private void brodcastMessage(String message) {
-        for (Connection connection : connectionList) {
+        for (InboundConnection connection : connectionList) {
             if (!this.equals(connection))
                 connection.sendMessage(message);
         }

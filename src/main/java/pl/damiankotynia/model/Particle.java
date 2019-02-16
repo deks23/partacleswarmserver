@@ -3,7 +3,9 @@ package pl.damiankotynia.model;
 import pl.damiankotynia.SwarmConstants;
 import pl.damiankotynia.service.RandomGenerator;
 
-public class Particle {
+import java.io.Serializable;
+
+public class Particle extends Point implements Serializable {
     private MVector position;
     private MVector velocity;
     private MVector bestLocalPosition;
@@ -12,6 +14,7 @@ public class Particle {
 
 
     public Particle(MVector position, MVector velocity, OptimizationTarget optimizationTarget){
+        super(position);
         this.position = position;
         this.velocity = velocity;
         if(optimizationTarget.equals(OptimizationTarget.MIN)){

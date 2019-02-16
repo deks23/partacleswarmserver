@@ -1,8 +1,9 @@
 package pl.damiankotynia.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class MVector {
+public class MVector implements Serializable {
     private double x;
     private double y;
 
