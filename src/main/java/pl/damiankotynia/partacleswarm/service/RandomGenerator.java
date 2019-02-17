@@ -1,4 +1,4 @@
-package pl.damiankotynia.service;
+package pl.damiankotynia.partacleswarm.service;
 
 import pl.damiankotynia.model.MVector;
 

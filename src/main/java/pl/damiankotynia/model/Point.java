@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Point implements Serializable {
 
-    private MVector position;
+    protected MVector position;
 
     public Point(MVector position) {
         this.position = position;

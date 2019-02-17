@@ -1,7 +1,5 @@
 package pl.damiankotynia.model;
 
-import org.mariuszgromada.math.mxparser.Function;
-
 import java.io.Serializable;
 import java.util.Objects;
 

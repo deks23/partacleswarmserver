@@ -1,4 +1,4 @@
-package pl.damiankotynia.exceptions;
+package pl.damiankotynia.partacleswarm.exceptions;
 
 public class InvalidRequestFormatException extends Exception {
 

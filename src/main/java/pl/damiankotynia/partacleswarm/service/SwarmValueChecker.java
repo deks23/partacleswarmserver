@@ -1,6 +1,6 @@
-package pl.damiankotynia.service;
+package pl.damiankotynia.partacleswarm.service;
 
-import pl.damiankotynia.SwarmConstants;
+
 import pl.damiankotynia.model.OptimizationTarget;
 import pl.damiankotynia.model.Particle;
 import pl.damiankotynia.model.Swarm;

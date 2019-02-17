@@ -1,4 +1,4 @@
-package pl.damiankotynia.service;
+package pl.damiankotynia.partacleswarm.service;
 
 import org.mariuszgromada.math.mxparser.Expression;
 import org.mariuszgromada.math.mxparser.Function;

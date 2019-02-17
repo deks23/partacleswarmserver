@@ -1,11 +1,11 @@
 package pl.damiankotynia.model;
 
-import pl.damiankotynia.service.RandomGenerator;
+import pl.damiankotynia.partacleswarm.service.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static pl.damiankotynia.SwarmConstants.*;
+import static pl.damiankotynia.partacleswarm.SwarmConstants.*;
 
 public class Swarm {
     private List<Particle> swarm;

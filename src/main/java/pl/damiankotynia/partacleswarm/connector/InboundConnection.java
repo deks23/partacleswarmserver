@@ -1,8 +1,9 @@
-package pl.damiankotynia.connector;
+package pl.damiankotynia.partacleswarm.connector;
 
-import pl.damiankotynia.exceptions.InvalidRequestFormatException;
+
+import pl.damiankotynia.partacleswarm.exceptions.InvalidRequestFormatException;
 import pl.damiankotynia.model.Response;
-import pl.damiankotynia.service.RequestExecutor;
+import pl.damiankotynia.partacleswarm.service.RequestExecutor;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,7 +12,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
 
-import static pl.damiankotynia.service.Utils.CONNECTION_LOGGER;
+import static pl.damiankotynia.partacleswarm.service.Utils.CONNECTION_LOGGER;
 
 public class InboundConnection implements Runnable {
     private Socket socket;
@@ -90,6 +91,10 @@ public class InboundConnection implements Runnable {
 
     }
 
+    /**
+     * Write string message on output stream
+     * @param message message to send
+     */
     public void sendMessage(String message) {
         try {
             synchronized (outputStream) {

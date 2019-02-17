@@ -1,12 +1,8 @@
 package pl.damiankotynia.model;
 
-import pl.damiankotynia.SwarmConstants;
-import pl.damiankotynia.service.RandomGenerator;
-
 import java.io.Serializable;
 
 public class Particle extends Point implements Serializable {
-    private MVector position;
     private MVector velocity;
     private MVector bestLocalPosition;
     private Double currentValue;
@@ -15,7 +11,6 @@ public class Particle extends Point implements Serializable {
 
     public Particle(MVector position, MVector velocity, OptimizationTarget optimizationTarget){
         super(position);
-        this.position = position;
         this.velocity = velocity;
         if(optimizationTarget.equals(OptimizationTarget.MIN)){
             this.currentValue = Double.MAX_VALUE;
@@ -26,13 +21,6 @@ public class Particle extends Point implements Serializable {
         }
     }
 
-    public MVector getPosition() {
-        return position;
-    }
-
-    public void setPosition(MVector position) {
-        this.position = position;
-    }
 
     public MVector getVelocity() {
         return velocity;

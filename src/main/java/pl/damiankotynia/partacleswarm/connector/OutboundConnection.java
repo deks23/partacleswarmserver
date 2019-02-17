@@ -1,4 +1,4 @@
-package pl.damiankotynia.connector;
+package pl.damiankotynia.partacleswarm.connector;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,6 +12,12 @@ public class OutboundConnection {
     private ObjectOutputStream outputStream;
     private boolean isRunning;
 
+    /**
+     * Constructor for OutboundConnection class
+     * @param port output connection port
+     * @param serverAddress server adress
+     * @throws IOException
+     */
     public OutboundConnection(int port, String serverAddress) throws IOException {
         socket = new Socket(serverAddress, port);
         BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -24,6 +30,11 @@ public class OutboundConnection {
         new Thread(new ResponseListener(inputStream)).start();
     }
 
+    /**
+     * Write object on output stream
+     * @param object object to write
+     * @return  return true if object has been written properly
+     */
 
     public synchronized boolean writeObject(Object object){
         try {

@@ -1,12 +1,13 @@
-package pl.damiankotynia;
+package pl.damiankotynia.partacleswarm;
 
-import pl.damiankotynia.connector.OutboundConnection;
+
+import pl.damiankotynia.partacleswarm.connector.OutboundConnection;
 import pl.damiankotynia.model.OptimizationTarget;
 import pl.damiankotynia.model.Point;
 import pl.damiankotynia.model.Swarm;
-import pl.damiankotynia.service.FunctionCalculator;
-import pl.damiankotynia.service.ParticleMover;
-import pl.damiankotynia.service.SwarmValueChecker;
+import pl.damiankotynia.partacleswarm.service.FunctionCalculator;
+import pl.damiankotynia.partacleswarm.service.ParticleMover;
+import pl.damiankotynia.partacleswarm.service.SwarmValueChecker;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class Main {
             functionCalculator.calculate(swarm);
             swarmValueChecker.checkValues(swarm);
             particleMover.moveParticles(swarm);
-            if(a%10==0) {
+            if(a%10==9) {
 
                 outboundConnection.writeObject(swarm.getSwarm());
             }

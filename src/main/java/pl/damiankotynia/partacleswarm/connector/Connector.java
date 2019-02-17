@@ -1,4 +1,4 @@
-package pl.damiankotynia.connector;
+package pl.damiankotynia.partacleswarm.connector;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,6 +11,11 @@ public class Connector implements Runnable{
     private ServerSocket listener;
     private int clientNumber;
     private List<InboundConnection> connectionList;
+
+    /**
+     * Constructor for Connector class
+     * @param port port for incomming connections
+     */
 
     public Connector(int port) {
         this.port = port;

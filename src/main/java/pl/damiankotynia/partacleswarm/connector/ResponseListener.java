@@ -1,9 +1,4 @@
-package pl.damiankotynia.connector;
-
-import pl.damiankotynia.model.Response;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
+package pl.damiankotynia.partacleswarm.connector;
 
 import pl.damiankotynia.model.Response;
 

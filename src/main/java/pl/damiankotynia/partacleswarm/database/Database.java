@@ -1,6 +1,6 @@
-package pl.damiankotynia.database;
+package pl.damiankotynia.partacleswarm.database;
 
-import pl.damiankotynia.exceptions.PermissionDeniedException;
+import pl.damiankotynia.partacleswarm.exceptions.PermissionDeniedException;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import static pl.damiankotynia.service.Utils.DATABASE_LOGGER;
+
 
 public class Database {
 
