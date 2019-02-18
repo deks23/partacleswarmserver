@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
 
-import static pl.damiankotynia.partacleswarm.service.Utils.CONNECTION_LOGGER;
+import static pl.damiankotynia.partacleswarm.service.Utils.INBOUND_CONNECTION_LOGGER;
 
 public class InboundConnection implements Runnable {
     private Socket socket;
@@ -24,7 +24,7 @@ public class InboundConnection implements Runnable {
     private boolean running;
 
     public InboundConnection(Socket socket, int client, List<InboundConnection> connectionList) {
-        System.out.println(CONNECTION_LOGGER + "New InboundConnection");
+        System.out.println(INBOUND_CONNECTION_LOGGER + "New InboundConnection");
         this.clientNumber = client;
         this.socket = socket;
         this.requestExecutor = new RequestExecutor();
@@ -43,7 +43,7 @@ public class InboundConnection implements Runnable {
         while (running) {
             try {
                 Object request = inputStream.readObject();
-                System.out.println(CONNECTION_LOGGER + request.toString());
+                System.out.println(INBOUND_CONNECTION_LOGGER + request.toString());
                 Response response = null;
                 try {
                     response = requestExecutor.executeRequest(request);
@@ -76,15 +76,15 @@ public class InboundConnection implements Runnable {
 
 
             } catch (SocketException e) {
-                System.out.println(CONNECTION_LOGGER + "Zerwano połączenie");
+                System.out.println(INBOUND_CONNECTION_LOGGER + "Zerwano połączenie");
                 running = !running;
                 connectionList.remove(this);
             } catch (IOException e) {
-                System.out.println(CONNECTION_LOGGER + "Zerwano połączenie2");
+                System.out.println(INBOUND_CONNECTION_LOGGER + "Zerwano połączenie2");
                 running = !running;
                 connectionList.remove(this);
             } catch (ClassNotFoundException e) {
-                System.out.println(CONNECTION_LOGGER + "Niepoprawny format zapytania");
+                System.out.println(INBOUND_CONNECTION_LOGGER + "Niepoprawny format zapytania");
             }
         }
 

@@ -3,6 +3,7 @@ package pl.damiankotynia.partacleswarm.connector;
 import java.io.*;
 import java.net.Socket;
 
+import static pl.damiankotynia.partacleswarm.service.Utils.OUTBOUND_CONNECTION_LOGGER;
 public class OutboundConnection {
 
     private Socket socket;
@@ -42,6 +43,7 @@ public class OutboundConnection {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(OUTBOUND_CONNECTION_LOGGER + " sending " + object.toString());
         try {
             outputStream.writeObject(object);
         } catch (IOException e) {

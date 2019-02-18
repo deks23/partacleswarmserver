@@ -25,6 +25,7 @@ public class Utils {
     }
 
     public static final String DATABASE_LOGGER = "DATABASE \t\t >>>> ";
-    public static final String CONNECTION_LOGGER = "CONNECTION \t\t >>>> ";
+    public static final String INBOUND_CONNECTION_LOGGER = "I_CONNECTION \t\t >>>> ";
+    public static final String OUTBOUND_CONNECTION_LOGGER = "O_CONNECTION \t\t >>>> ";
     public static final String REQUEST_EXECUTOR_LOGGER = "REQUEST_EXE \t >>>> ";
 }

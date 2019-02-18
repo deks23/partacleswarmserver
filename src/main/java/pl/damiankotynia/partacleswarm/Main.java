@@ -28,8 +28,9 @@ public class Main {
         swarmValueChecker.checkValues(swarm);
         OutboundConnection outboundConnection = new OutboundConnection(4443, "localhost");
 
+        outboundConnection.run();
 
-        swarm.getSwarm().stream().forEach(e -> System.out.println("BEFORE" + e));
+        //swarm.getSwarm().stream().forEach(e -> System.out.println("BEFORE" + e));
 
 
         for(int a = 0; a<1000; a++){
