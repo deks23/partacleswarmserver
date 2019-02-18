@@ -4,7 +4,8 @@ import java.io.*;
 import java.net.Socket;
 
 import static pl.damiankotynia.partacleswarm.service.Utils.OUTBOUND_CONNECTION_LOGGER;
-public class OutboundConnection {
+
+public class OutboundConnection implements Runnable{
 
     private Socket socket;
     private int port;

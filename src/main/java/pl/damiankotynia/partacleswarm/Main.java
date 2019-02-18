@@ -20,15 +20,15 @@ public class Main {
         //int port = 4444;
         //new Thread(new Connector(port)).start();
         int i = 100;
-        Swarm swarm = new Swarm(i, OptimizationTarget.MIN);
+        Swarm swarm = new Swarm(i, OptimizationTarget.MAX);
         ParticleMover particleMover = new ParticleMover(0.5,0.5, 0.5);
         FunctionCalculator functionCalculator = new FunctionCalculator("f(x, y) = (1 - x)^2 + 100 *  (y-x*x)^2");
         SwarmValueChecker swarmValueChecker = new SwarmValueChecker();
         functionCalculator.calculate(swarm);
         swarmValueChecker.checkValues(swarm);
-        OutboundConnection outboundConnection = new OutboundConnection(4443, "localhost");
 
-        outboundConnection.run();
+        OutboundConnection outboundConnection = new OutboundConnection(4443, "localhost");
+        new Thread(outboundConnection).start();
 
         //swarm.getSwarm().stream().forEach(e -> System.out.println("BEFORE" + e));
 

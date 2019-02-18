@@ -52,27 +52,7 @@ public class InboundConnection implements Runnable {
                 }
 
         //TODO ustawienie na podstawie późniejszych stausów
-       /*         switch (response.getResponseType()) {
-                    case RESERVATION_COMPLETE:
-                    case DELETED_RESERVATION:
-                        brodcastMessage(response.getMessage());
-                        synchronized (outputStream) {
-                            outputStream.writeObject(response);
-                        }
-                        break;
-                    case RESERVATION_FAILED:
-                    case RESERVATION_REMOVING_FAILED:
-                        synchronized (outputStream) {
-                            outputStream.writeObject(response);
-                        }
-                        break;
-                    case GET_OWN_RESERVATIONS:
-                    case GET_RESERVATIONS:
-                        synchronized (outputStream){
-                            outputStream.writeObject(response);
-                        }
-                        break;
-                }*/
+
 
 
             } catch (SocketException e) {
@@ -104,12 +84,6 @@ public class InboundConnection implements Runnable {
             e.printStackTrace();
         }
     }
-    /*TODO wywalić jak będzie zbędna
-    private void brodcastMessage(String message) {
-        for (InboundConnection connection : connectionList) {
-            if (!this.equals(connection))
-                connection.sendMessage(message);
-        }
-    }*/
+
 
 }
