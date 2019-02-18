@@ -3,7 +3,7 @@ package pl.damiankotynia.partacleswarm.service;
 import pl.damiankotynia.partacleswarm.database.Database;
 import pl.damiankotynia.partacleswarm.exceptions.InvalidRequestFormatException;
 import pl.damiankotynia.model.Request;
-import pl.damiankotynia.model.Response;
+import pl.damiankotynia.model.OptimizerResponse;
 
 
 public class RequestExecutor {
@@ -14,7 +14,7 @@ public class RequestExecutor {
         //this.database = Database.getInstance();
     }
 
-    public Response executeRequest(Object request) throws InvalidRequestFormatException {
+    public OptimizerResponse executeRequest(Object request) throws InvalidRequestFormatException {
 
         return null;
     }

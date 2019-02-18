@@ -2,7 +2,7 @@ package pl.damiankotynia.partacleswarm.connector;
 
 
 import pl.damiankotynia.partacleswarm.exceptions.InvalidRequestFormatException;
-import pl.damiankotynia.model.Response;
+import pl.damiankotynia.model.OptimizerResponse;
 import pl.damiankotynia.partacleswarm.service.RequestExecutor;
 
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class InboundConnection implements Runnable {
             try {
                 Object request = inputStream.readObject();
                 System.out.println(INBOUND_CONNECTION_LOGGER + request.toString());
-                Response response = null;
+                OptimizerResponse response = null;
                 try {
                     response = requestExecutor.executeRequest(request);
                 } catch (InvalidRequestFormatException e) {

@@ -1,9 +1,9 @@
 package pl.damiankotynia.partacleswarm.connector;
 
-import pl.damiankotynia.model.Response;
+import pl.damiankotynia.model.ChartGeneratorResponse;
+import pl.damiankotynia.model.OptimizerResponse;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,12 +22,12 @@ public class ResponseListener implements Runnable {
     public void run() {
         while (isRunning) {
             BufferedImage responseObject = null;
-            Response response = null;
+            ChartGeneratorResponse response = null;
 
             try {
 
-                responseObject = ImageIO.read(inputStream);
-                inputStream.defaultReadObject();
+                response  = (ChartGeneratorResponse)inputStream.readObject();
+
 
                 System.out.println(INBOUND_CONNECTION_LOGGER + " recieved object ");
 
