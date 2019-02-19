@@ -12,6 +12,7 @@ import static pl.damiankotynia.partacleswarm.service.Utils.INBOUND_CONNECTION_LO
 public class ResponseListener implements Runnable {
     private ObjectInputStream inputStream;
     private boolean isRunning;
+    
 
     public ResponseListener(ObjectInputStream inputStream) {
         this.inputStream = inputStream;

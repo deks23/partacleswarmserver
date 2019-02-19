@@ -13,10 +13,6 @@ public class Swarm {
     private double bestGlobalValue;
     private OptimizationTarget optimizationTarget;
 
-    private Swarm(){
-
-    }
-
     public Swarm(int particleAmmount, OptimizationTarget optimizationTarget) {
         swarm = new ArrayList<>(particleAmmount);
         this.optimizationTarget = optimizationTarget;

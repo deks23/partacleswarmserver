@@ -1,6 +1,7 @@
 package pl.damiankotynia.partacleswarm;
 
 
+import org.mariuszgromada.math.mxparser.Function;
 import pl.damiankotynia.partacleswarm.connector.OutboundConnection;
 import pl.damiankotynia.model.OptimizationTarget;
 import pl.damiankotynia.model.Point;
@@ -24,6 +25,10 @@ public class Main {
         ParticleMover particleMover = new ParticleMover(0.5,0.5, 0.5);
         FunctionCalculator functionCalculator = new FunctionCalculator("f(x, y) = (1 - x)^2 + 100 *  (y-x*x)^2");
         SwarmValueChecker swarmValueChecker = new SwarmValueChecker();
+
+
+
+
         functionCalculator.calculate(swarm);
         swarmValueChecker.checkValues(swarm);
 

@@ -1,5 +1,7 @@
 package pl.damiankotynia.partacleswarm.connector;
 
+import pl.damiankotynia.model.Response;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -13,7 +15,7 @@ public class OutboundConnection implements Runnable{
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
     private boolean isRunning;
-
+    private ResponseListener responseListener;
     /**
      * Constructor for OutboundConnection class
      * @param port output connection port
@@ -29,7 +31,8 @@ public class OutboundConnection implements Runnable{
     }
 
     public void run() {
-        new Thread(new ResponseListener(inputStream)).start();
+        responseListener = new ResponseListener(inputStream);
+        new Thread(responseListener).start();
     }
 
     /**
@@ -52,6 +55,10 @@ public class OutboundConnection implements Runnable{
             return false;
         }
         return true;
+    }
+
+    public ResponseListener getResponseListener() {
+        return responseListener;
     }
 }
 

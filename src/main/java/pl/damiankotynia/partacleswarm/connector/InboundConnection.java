@@ -22,20 +22,24 @@ public class InboundConnection implements Runnable {
     private RequestExecutor requestExecutor;
     private List<InboundConnection> connectionList;
     private boolean running;
+    private ResponseSender responseSender;
 
     public InboundConnection(Socket socket, int client, List<InboundConnection> connectionList) {
         System.out.println(INBOUND_CONNECTION_LOGGER + "New InboundConnection");
-        this.clientNumber = client;
-        this.socket = socket;
-        this.requestExecutor = new RequestExecutor();
-        this.connectionList = connectionList;
-        this.running = true;
         try {
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
             this.inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.clientNumber = client;
+        this.socket = socket;
+        this.responseSender = new ResponseSender(this.outputStream);
+        this.requestExecutor = new RequestExecutor(responseSender);
+        this.connectionList = connectionList;
+        this.running = true;
+
+
 
     }
 
@@ -51,8 +55,9 @@ public class InboundConnection implements Runnable {
                     e.printStackTrace();
                 }
 
-        //TODO ustawienie na podstawie późniejszych stausów
+        //TODO wysyłka response
 
+                running = !running;
 
 
             } catch (SocketException e) {
