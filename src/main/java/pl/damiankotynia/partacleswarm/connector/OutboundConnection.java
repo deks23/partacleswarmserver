@@ -16,6 +16,7 @@ public class OutboundConnection implements Runnable{
     private ObjectOutputStream outputStream;
     private boolean isRunning;
     private ResponseListener responseListener;
+
     /**
      * Constructor for OutboundConnection class
      * @param port output connection port

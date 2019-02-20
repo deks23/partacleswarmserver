@@ -9,7 +9,7 @@ import pl.damiankotynia.model.Swarm;
 import pl.damiankotynia.partacleswarm.service.FunctionCalculator;
 import pl.damiankotynia.partacleswarm.service.ParticleMover;
 import pl.damiankotynia.partacleswarm.service.SwarmValueChecker;
-
+import pl.damiankotynia.partacleswarm.connector.Connector;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        //int port = 4444;
-        //new Thread(new Connector(port)).start();
-        int i = 100;
+        int port = 4444;
+        new Thread(new Connector(port)).start();
+     /*   int i = 100;
         Swarm swarm = new Swarm(i, OptimizationTarget.MAX);
         ParticleMover particleMover = new ParticleMover(0.5,0.5, 0.5);
         FunctionCalculator functionCalculator = new FunctionCalculator("f(x, y) = (1 - x)^2 + 100 *  (y-x*x)^2");
@@ -54,19 +54,11 @@ public class Main {
 
         swarm.getSwarm().stream().forEach(e -> System.out.println("AFTER: " + e));
 
-/*
-        Coord3d[] points = new Coord3d[i];
-        Color[]   colors = new Color[i];
-        int q =0;
-        for(Particle particle : swarm.getSwarm()){
-            points[q] = new Coord3d(particle.getPosition().getX(), particle.getPosition().getY(), 0.0);
-
-        }*/
 
 
         List<Point> qwe  = new ArrayList<>(swarm.getSwarm());
 
-        System.out.println(swarm.getBestGlobalValue() + " " + swarm.getBestGlobalPosition());
+        System.out.println(swarm.getBestGlobalValue() + " " + swarm.getBestGlobalPosition());*/
 
     }
 }

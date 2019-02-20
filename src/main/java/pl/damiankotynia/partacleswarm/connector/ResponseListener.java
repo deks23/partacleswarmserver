@@ -12,7 +12,7 @@ import static pl.damiankotynia.partacleswarm.service.Utils.INBOUND_CONNECTION_LO
 public class ResponseListener implements Runnable {
     private ObjectInputStream inputStream;
     private boolean isRunning;
-    
+    private ResponseSender responseSender;
 
     public ResponseListener(ObjectInputStream inputStream) {
         this.inputStream = inputStream;
@@ -29,6 +29,7 @@ public class ResponseListener implements Runnable {
 
                 response  = (ChartGeneratorResponse)inputStream.readObject();
 
+                responseSender.sendResponse(response);
 
                 System.out.println(INBOUND_CONNECTION_LOGGER + " recieved object ");
 
@@ -43,7 +44,9 @@ public class ResponseListener implements Runnable {
         }
     }
 
-
+    public void setResponseSender(ResponseSender responseSender) {
+        this.responseSender = responseSender;
+    }
 }
 
 

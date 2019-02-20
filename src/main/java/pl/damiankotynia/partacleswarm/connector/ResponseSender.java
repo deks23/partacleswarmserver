@@ -28,13 +28,13 @@ public class ResponseSender implements Runnable{
         }
     }
 
-    public void sendResponse(Response response){
+    public void sendResponse(Response response) throws IOException {
         try {
             outputStream.writeObject(response);
         } catch (IOException e) {
             System.out.println("\n Error while sending response. \n");
             isRunning ^= true;
-            e.printStackTrace();
+            throw e;
         }
     }
 }

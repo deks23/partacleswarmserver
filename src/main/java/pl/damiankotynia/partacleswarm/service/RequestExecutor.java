@@ -21,10 +21,11 @@ public class RequestExecutor {
         this.responseSender = responseSender;
         try {
             this.outboundConnection = new OutboundConnection(4443, "localhost");
+            outboundConnection.run();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        outboundConnection.getResponseListener().setResponseSender(responseSender);
     }
 
     public OptimizerResponse executeRequest(Object request) throws InvalidRequestFormatException {
@@ -45,8 +46,6 @@ public class RequestExecutor {
                 functionCalculator.calculate(swarm);
                 swarmValueChecker.checkValues(swarm);
 
-               // OutboundConnection outboundConnection = new OutboundConnection(4443, "localhost");
-                //new Thread(outboundConnection).start();
 
                 //swarm.getSwarm().stream().forEach(e -> System.out.println("BEFORE" + e));
 
@@ -55,10 +54,9 @@ public class RequestExecutor {
                     functionCalculator.calculate(swarm);
                     swarmValueChecker.checkValues(swarm);
                     particleMover.moveParticles(swarm);
-                    if(a%10==9) {
-
-                        //outboundConnection.writeObject(swarm.getSwarm());
-                    }
+                    //if(a%10==9) {
+                        outboundConnection.writeObject(swarm.getSwarm());
+                  //  }
                 }
 
                 functionCalculator.calculate(swarm);
