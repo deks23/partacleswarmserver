@@ -2,6 +2,7 @@ package pl.damiankotynia.partacleswarm.connector;
 
 import pl.damiankotynia.model.ChartGeneratorResponse;
 import pl.damiankotynia.model.OptimizerResponse;
+import pl.damiankotynia.model.ResponseType;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -28,7 +29,7 @@ public class ResponseListener implements Runnable {
             try {
 
                 response  = (ChartGeneratorResponse)inputStream.readObject();
-
+                response.setResponseType(ResponseType.IMAGE);
                 responseSender.sendResponse(response);
 
                 System.out.println(INBOUND_CONNECTION_LOGGER + " recieved object ");

@@ -1,16 +1,11 @@
 package pl.damiankotynia.partacleswarm.service;
 
-import org.mariuszgromada.math.mxparser.Function;
 import pl.damiankotynia.model.*;
 import pl.damiankotynia.partacleswarm.connector.OutboundConnection;
 import pl.damiankotynia.partacleswarm.connector.ResponseSender;
-import pl.damiankotynia.partacleswarm.database.Database;
 import pl.damiankotynia.partacleswarm.exceptions.InvalidRequestFormatException;
 
 import java.io.IOException;
-
-import static pl.damiankotynia.model.OptimizationType.DIFFERENTIAL_EVOLUTION;
-import static pl.damiankotynia.model.OptimizationType.PARTACLE_SWARM;
 
 
 public class RequestExecutor {
@@ -37,14 +32,14 @@ public class RequestExecutor {
                 break;
             case PARTACLE_SWARM:
                 Swarm swarm = new Swarm(validatedRequest.getParticleAmmount(), validatedRequest.getOptimizationTarget());
-                ParticleMover particleMover = new ParticleMover(validatedRequest.getC1(),validatedRequest.getC2(), validatedRequest.getInteria());
+                ParticleMover particleMover = new ParticleMover(validatedRequest.getC1(), validatedRequest.getC2(), validatedRequest.getInteria());
                 FunctionCalculator functionCalculator = new FunctionCalculator(validatedRequest.getFunction());
                 SwarmValueChecker swarmValueChecker = new SwarmValueChecker();
 
                 functionCalculator.calculate(swarm);
                 swarmValueChecker.checkValues(swarm);
 
-                for(int a = 0; a<1000; a++){
+                for (int a = 0; a < 50; a++) {
                     functionCalculator.calculate(swarm);
                     swarmValueChecker.checkValues(swarm);
                     particleMover.moveParticles(swarm);
@@ -52,14 +47,30 @@ public class RequestExecutor {
                 }
                 functionCalculator.calculate(swarm);
                 swarmValueChecker.checkValues(swarm);
+                Response response = new Response();
+                response.setResponseType(ResponseType.FINISHED);
+
+                response.setMessage("Wynik optymalizacji = "
+                        + swarm.getBestGlobalValue()
+                        + "\n"
+                        + "W punkcie = X:"
+                        + swarm.getBestGlobalPosition().getX()
+                        + " Y: "
+                        + swarm.getBestGlobalPosition().getY());
 
 
-                swarm.getSwarm().stream().forEach(e -> System.out.println("AFTER: " + e));
+                try {
+                    responseSender.sendResponse(response);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                //swarm.getSwarm().stream().forEach(e -> System.out.println("AFTER: " + e));
 
 
                 break;
-                default:
-                    throw new InvalidRequestFormatException();
+            default:
+                throw new InvalidRequestFormatException();
         }
 
         return null;
@@ -72,8 +83,6 @@ public class RequestExecutor {
         else
             return (Request) request;
     }
-
-
 
 
 }
