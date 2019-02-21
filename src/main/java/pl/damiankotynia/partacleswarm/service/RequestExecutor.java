@@ -41,24 +41,15 @@ public class RequestExecutor {
                 FunctionCalculator functionCalculator = new FunctionCalculator(validatedRequest.getFunction());
                 SwarmValueChecker swarmValueChecker = new SwarmValueChecker();
 
-
-
                 functionCalculator.calculate(swarm);
                 swarmValueChecker.checkValues(swarm);
-
-
-                //swarm.getSwarm().stream().forEach(e -> System.out.println("BEFORE" + e));
-
 
                 for(int a = 0; a<1000; a++){
                     functionCalculator.calculate(swarm);
                     swarmValueChecker.checkValues(swarm);
                     particleMover.moveParticles(swarm);
-                    //if(a%10==9) {
-                        outboundConnection.writeObject(swarm.getSwarm());
-                  //  }
+                    outboundConnection.writeObject(swarm.getSwarm());
                 }
-
                 functionCalculator.calculate(swarm);
                 swarmValueChecker.checkValues(swarm);
 

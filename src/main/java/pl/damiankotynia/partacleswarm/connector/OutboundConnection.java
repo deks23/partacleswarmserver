@@ -48,7 +48,7 @@ public class OutboundConnection implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(OUTBOUND_CONNECTION_LOGGER + " sending " + object.toString());
+        System.out.println(OUTBOUND_CONNECTION_LOGGER + " sending " );
         try {
             outputStream.writeObject(object);
         } catch (IOException e) {

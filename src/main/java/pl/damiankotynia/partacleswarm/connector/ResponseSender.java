@@ -26,6 +26,8 @@ public class ResponseSender implements Runnable{
 
 
         }
+
+
     }
 
     public void sendResponse(Response response) throws IOException {
@@ -36,6 +38,10 @@ public class ResponseSender implements Runnable{
             isRunning ^= true;
             throw e;
         }
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 }
 
