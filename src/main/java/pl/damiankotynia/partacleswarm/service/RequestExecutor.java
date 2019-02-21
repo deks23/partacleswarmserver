@@ -11,7 +11,7 @@ import java.io.IOException;
 public class RequestExecutor {
     private ResponseSender responseSender;
     private OutboundConnection outboundConnection;
-
+    private int iterations = 50;
     public RequestExecutor(ResponseSender responseSender) {
         this.responseSender = responseSender;
         try {
@@ -25,8 +25,23 @@ public class RequestExecutor {
 
     public OptimizerResponse executeRequest(Object request) throws InvalidRequestFormatException {
         Request validatedRequest = getRequest(request);
+        iterations = validatedRequest.getIterations();
         switch (validatedRequest.getOptimizationType()) {
             case DIFFERENTIAL_EVOLUTION:
+                DifferentialEvolution differentialEvolution = new DifferentialEvolution(validatedRequest.getParticleAmmount(),
+                        validatedRequest.getC1(),
+                        validatedRequest.getC2(),
+                        validatedRequest.getFunction(),
+                        validatedRequest.getOptimizationTarget());
+                differentialEvolution.generatePopulation();
+                for (int a = 0; a<iterations; a++ ){
+                    differentialEvolution.mutate();
+                    differentialEvolution.crossing();
+                    differentialEvolution.selection();
+                    differentialEvolution.clearTemp();
+                    outboundConnection.writeObject(differentialEvolution.getInitialPopulation());
+                }
+                sendFinished();
 
 
                 break;
@@ -39,34 +54,14 @@ public class RequestExecutor {
                 functionCalculator.calculate(swarm);
                 swarmValueChecker.checkValues(swarm);
 
-                for (int a = 0; a < 50; a++) {
+                for (int a = 0; a < iterations; a++) {
                     functionCalculator.calculate(swarm);
                     swarmValueChecker.checkValues(swarm);
                     particleMover.moveParticles(swarm);
                     outboundConnection.writeObject(swarm.getSwarm());
                 }
-                functionCalculator.calculate(swarm);
-                swarmValueChecker.checkValues(swarm);
-                Response response = new Response();
-                response.setResponseType(ResponseType.FINISHED);
 
-                response.setMessage("Wynik optymalizacji = "
-                        + swarm.getBestGlobalValue()
-                        + "\n"
-                        + "W punkcie = X:"
-                        + swarm.getBestGlobalPosition().getX()
-                        + " Y: "
-                        + swarm.getBestGlobalPosition().getY());
-
-
-                try {
-                    responseSender.sendResponse(response);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                //swarm.getSwarm().stream().forEach(e -> System.out.println("AFTER: " + e));
-
+                sendFinished();
 
                 break;
             default:
@@ -74,6 +69,20 @@ public class RequestExecutor {
         }
 
         return null;
+    }
+
+    private void sendFinished() {
+        Response response = new Response();
+        response.setResponseType(ResponseType.FINISHED);
+
+        response.setMessage("Zakonczono");
+
+
+        try {
+            responseSender.sendResponse(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

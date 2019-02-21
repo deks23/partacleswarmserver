@@ -55,8 +55,6 @@ public class InboundConnection implements Runnable {
                     e.printStackTrace();
                 }
 
-        //TODO wysyłka response
-
                 running = !running;
 
 
